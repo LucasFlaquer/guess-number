@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Digit } from '../components/Digit';
 
 export const Container = styled.div`
   max-width: 1200px; 
@@ -27,18 +28,7 @@ export const Content = styled.div`
   justify-content: center;
   margin-top: 130px;
 `;
-export const Digit = styled.div`
-  height: 200px;
-  width: 100px;
-  background: #353131;
-  position: relative;
 
-  .top {
-    img {
-      fill: red;
-    }
-  }
-`;
 
 export default function Home(): JSX.Element {
   return (
@@ -48,14 +38,17 @@ export default function Home(): JSX.Element {
         <Separator />
       </Title> 
       <Content>
-        <Digit>
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-        </Digit>
+        <Digit 
+          height={56 * 4}
+          width={100 * 4}
+          color1="#ffc107"
+          color2="#ffc107"
+          color3="#ffc107"
+          color4="#ffc107"
+          color5="#ffc107"
+          color6="#ffc107"
+          color7="#ffc107"
+        />
       </Content>
     </Container>
   );
