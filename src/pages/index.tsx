@@ -73,9 +73,13 @@ export const Message = styled.p<MessageProps>`
   font-weight: bold;
   height: 15px;
   margin-bottom: 40px;
+  font-size: 1.3rem;
+  font-family: 'Montserrat', sans-serif;
   color: ${props => props.messageColor || '#FF6600'};
 
 `;
+
+
 
 export default function Home({value, error}:HomeProps): JSX.Element {
   const [guessNumber, setGuessNumber] = useState('');
@@ -93,6 +97,7 @@ export default function Home({value, error}:HomeProps): JSX.Element {
       setMessageColor('#CC3300');
       setDigitColor('#CC3300');
       setDigits([numberColorsSchema(5), numberColorsSchema(2), numberColorsSchema(2)]);
+      setIsDisabled(true);
     } 
   }, [])
 
@@ -177,6 +182,7 @@ export const getStaticProps: GetStaticProps = async () => {
       }
     }
   } catch (error) {
+    console.log('deu erro')
     return {
       props: {
         error: 'error',
