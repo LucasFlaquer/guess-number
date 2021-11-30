@@ -136,6 +136,7 @@ export default function Home({value, error}:HomeProps): JSX.Element {
     else setMessage('É menor');    
     const digits = guessNumber.split('').map(number => numberColorsSchema(Number(number)));
     setDigits(digits);  
+    setGuessNumber('');
   }
   function handleInputChange(event: React.ChangeEvent<HTMLInputElement>): void {
     console.log(event.target.value)
