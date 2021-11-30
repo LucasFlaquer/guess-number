@@ -1,9 +1,14 @@
 import { GetStaticProps } from 'next';
 import { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import { ButtonRestart } from '../components/buttons/ButtonRestart';
+import { ButtonSend } from '../components/buttons/ButtonSend';
 import { Container } from '../components/Container';
 import { Content } from '../components/Content';
 import { Digit } from '../components/Digit';
+import { DigitsList } from '../components/Digits/DigitsList';
+import { Form } from '../components/Form';
+import { Input } from '../components/Form/Input';
+import { Message } from '../components/Message';
 import { Separator } from '../components/Separator';
 import { Title } from '../components/Title';
 import { fetchNumber } from '../services/fetchNumber';
@@ -14,88 +19,6 @@ interface HomeProps {
   value: number;
   error: string | undefined;
 }
-
-export const DigitsList = styled.div`
-  display: flex;
-  justify-content: center;
-  span {
-    display: block;
-    & + span {
-      margin-left: 15px;
-    }
-  }
-`;
-
-export const Form = styled.form`
-  margin-top: 100px;
-  display: flex;
-`;
-
-export const Input = styled.input`
-  padding: 14px 8px;
-  border: 2px solid #cfcfcf;
-  border-radius: 4px;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 400;
-  font-size: 12px;
-  height: 42px;
-  min-width: 210px;
-  margin-right: 15px;
-  outline: none;
-
-  &:focus,
-  &:active {
-    border-color: #ef6c00;
-  }
-`;
-
-export const Button = styled.button`
-  display: block;
-  height: 42px;
-  text-transform: uppercase;
-  background: linear-gradient(#ef6c00, #db6300);
-  padding: 14px 8px;
-  border-radius: 4px;
-  color: #fff;
-  font-family: 'Roboto', sans-serif;
-  font-weight: bold;
-  border: 1px solid transparent;
-  transition: filter 0.2s ease-in-out;
-
-  &:hover {
-    filter: brightness(0.8);
-  }
-`;
-
-interface MessageProps {
-  messageColor: string;
-}
-
-export const Message = styled.p<MessageProps>`
-  text-align: center;
-  text-transform: uppercase;
-  font-weight: bold;
-  height: 15px;
-  margin-bottom: 40px;
-  font-size: 1.3rem;
-  font-family: 'Montserrat', sans-serif;
-  color: ${(props) => props.messageColor || '#FF6600'};
-`;
-
-export const RestartButton = styled.button`
-  background: linear-gradient(#434854, #9e9e9e);
-  height: 42px;
-  position: absolute;
-  bottom: 20%;
-  border-radius: 4px;
-  border: 1px solid transparent;
-  text-transform: uppercase;
-  color: #fff;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  padding: 14px 8px;
-`;
 
 export default function Home({ value, error }: HomeProps): JSX.Element {
   const [guessNumber, setGuessNumber] = useState('');
@@ -119,7 +42,7 @@ export default function Home({ value, error }: HomeProps): JSX.Element {
       ]);
       setIsDisabled(true);
     }
-  }, []);
+  }, [value, error]);
 
   async function handleSubmit(
     event: React.FormEvent<HTMLFormElement>
@@ -195,10 +118,10 @@ export default function Home({ value, error }: HomeProps): JSX.Element {
           ))}
         </DigitsList>
         {isDisabled && (
-          <RestartButton onClick={handleReset}>
+          <ButtonRestart onClick={handleReset}>
             <img src="/refresh.svg" alt="refresh icon" />
             nova partida
-          </RestartButton>
+          </ButtonRestart>
         )}
 
         <Form onSubmit={handleSubmit}>
@@ -209,9 +132,9 @@ export default function Home({ value, error }: HomeProps): JSX.Element {
             onChange={handleInputChange}
             disabled={isDisabled}
           />
-          <Button disabled={isDisabled} type="submit">
+          <ButtonSend disabled={isDisabled} type="submit">
             Enviar
-          </Button>
+          </ButtonSend>
         </Form>
       </Content>
     </Container>
