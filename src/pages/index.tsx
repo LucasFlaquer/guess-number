@@ -151,13 +151,13 @@ export default function Home({value, error}:HomeProps): JSX.Element {
   async function handleReset(): Promise<void> {
     setDigits([numberColorsSchema(0)]);
     try {
-      const number = await fetchNumber();
-      setCorrectNumber(number.value);
       setIsDisabled(false);
       setDigitColor('#262A34');
       setGuessNumber('');
       setMessageColor('');
       setMessage('');
+      const number = await fetchNumber();
+      setCorrectNumber(number.value);
       
     } catch (error:any) {
       setDigitColor('#CC3300');
