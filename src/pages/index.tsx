@@ -20,26 +20,29 @@ interface HomeProps {
   error: string | undefined;
 }
 
+interface IDigit extends ColorSchema {
+  key: string;
+}
+
 export default function Home({ value, error }: HomeProps): JSX.Element {
   const [guessNumber, setGuessNumber] = useState('');
-  const [digits, setDigits] = useState<ColorSchema[]>([]);
+  const [digits, setDigits] = useState<IDigit[]>([]);
   const [correctNumber, setCorrectNumber] = useState(0);
   const [message, setMessage] = useState('');
   const [digitColor, setDigitColor] = useState('#262A34');
   const [messageColor, setMessageColor] = useState('');
   const [isDisabled, setIsDisabled] = useState(false);
   useEffect(() => {
-    setDigits([numberColorsSchema(0)]);
+    const zeroDigit = { ...numberColorsSchema(0), key: '0-0' };
+    setDigits([zeroDigit]);
     setCorrectNumber(value);
     if (error) {
       setMessage('ERRO');
       setMessageColor('#CC3300');
       setDigitColor('#CC3300');
-      setDigits([
-        numberColorsSchema(5),
-        numberColorsSchema(0),
-        numberColorsSchema(2),
-      ]);
+      const fiveDigit = { ...numberColorsSchema(5), key: `5-0` };
+      const twoDigit = { ...numberColorsSchema(2), key: `2-0` };
+      setDigits([fiveDigit, zeroDigit, twoDigit]);
       setIsDisabled(true);
     }
   }, [value, error]);
@@ -56,10 +59,13 @@ export default function Home({ value, error }: HomeProps): JSX.Element {
       setIsDisabled(true);
     } else if (Number(guessNumber) > correctNumber) setMessage('É maior');
     else setMessage('É menor');
-    const newDigitsNumber = guessNumber
-      .split('')
-      .map((number) => numberColorsSchema(Number(number)));
-    setDigits(newDigitsNumber);
+    const newDigitsNumber = guessNumber.split('').map((number, index) => {
+      return {
+        ...numberColorsSchema(Number(number)),
+        key: `${number}-${index}`,
+      };
+    });
+    setDigits([...newDigitsNumber]);
     setGuessNumber('');
   }
   function handleInputChange(event: React.ChangeEvent<HTMLInputElement>): void {
@@ -72,7 +78,7 @@ export default function Home({ value, error }: HomeProps): JSX.Element {
     }
   }
   async function handleReset(): Promise<void> {
-    setDigits([numberColorsSchema(0)]);
+    setDigits([{ ...numberColorsSchema(0), key: '0-0' }]);
     try {
       setIsDisabled(false);
       setDigitColor('#262A34');
@@ -113,7 +119,7 @@ export default function Home({ value, error }: HomeProps): JSX.Element {
               bottomLeftLed={digit.bottomLeft}
               bottomRightLed={digit.bottomRight}
               middleLed={digit.middle}
-              key={digit.id}
+              key={digit.key}
             />
           ))}
         </DigitsList>
