@@ -1,12 +1,12 @@
 export interface ColorSchema {
-  id: number,
-  top: boolean,
-  topLeft: boolean,
-  topRight: boolean,
-  middle: boolean,
-  bottom: boolean,
-  bottomLeft: boolean,
-  bottomRight: boolean,
+  id: number;
+  top: boolean;
+  topLeft: boolean;
+  topRight: boolean;
+  middle: boolean;
+  bottom: boolean;
+  bottomLeft: boolean;
+  bottomRight: boolean;
 }
 export const digits: ColorSchema[] = [
   {
@@ -17,7 +17,7 @@ export const digits: ColorSchema[] = [
     bottom: true,
     bottomLeft: true,
     bottomRight: true,
-    middle: false
+    middle: false,
   },
   {
     id: 1,
@@ -27,7 +27,7 @@ export const digits: ColorSchema[] = [
     bottom: false,
     bottomLeft: false,
     bottomRight: true,
-    middle: false
+    middle: false,
   },
   {
     id: 2,
@@ -37,7 +37,7 @@ export const digits: ColorSchema[] = [
     bottom: true,
     bottomLeft: true,
     bottomRight: false,
-    middle: true
+    middle: true,
   },
   {
     id: 3,
@@ -47,7 +47,7 @@ export const digits: ColorSchema[] = [
     bottom: true,
     bottomLeft: false,
     bottomRight: true,
-    middle: true
+    middle: true,
   },
   {
     id: 4,
@@ -57,7 +57,7 @@ export const digits: ColorSchema[] = [
     bottom: false,
     bottomLeft: false,
     bottomRight: true,
-    middle: true
+    middle: true,
   },
   {
     id: 5,
@@ -67,7 +67,7 @@ export const digits: ColorSchema[] = [
     bottom: true,
     bottomLeft: false,
     bottomRight: true,
-    middle: true
+    middle: true,
   },
   {
     id: 6,
@@ -77,7 +77,7 @@ export const digits: ColorSchema[] = [
     bottom: true,
     bottomLeft: true,
     bottomRight: true,
-    middle: true
+    middle: true,
   },
   {
     id: 7,
@@ -87,7 +87,7 @@ export const digits: ColorSchema[] = [
     bottom: false,
     bottomLeft: false,
     bottomRight: true,
-    middle: false
+    middle: false,
   },
   {
     id: 8,
@@ -97,7 +97,7 @@ export const digits: ColorSchema[] = [
     bottom: true,
     bottomLeft: true,
     bottomRight: true,
-    middle: true
+    middle: true,
   },
   {
     id: 9,
@@ -107,7 +107,6 @@ export const digits: ColorSchema[] = [
     bottom: false,
     bottomLeft: false,
     bottomRight: true,
-    middle: true
-  }
-  
-]
+    middle: true,
+  },
+];

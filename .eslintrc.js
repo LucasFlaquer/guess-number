@@ -54,10 +54,8 @@ module.exports = {
     'no-useless-constructor': 'off',
     '@next/next/no-img-element': 'off',
     'no-underscore-dangle': 'off',
-    "react/function-component-definition": [2, {
-      namedComponents: "function-declaration" | "function-expression" | "arrow-function",
-      unnamedComponents: "function-expression" | "arrow-function"
-    }]
+    'react/function-component-definition': 'off',
+    'react/jsx-no-bind': 'off',
   },
   settings: {
     'import/resolver': {
