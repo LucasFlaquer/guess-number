@@ -89,6 +89,9 @@ export default function Home({ value, error }: HomeProps): JSX.Element {
       setCorrectNumber(number.value);
     } catch (err: any) {
       setDigitColor('#CC3300');
+      setMessage('Erro');
+      setMessageColor('#CC3300');
+      setIsDisabled(true);
       setDigits(
         err.response.status
           .toString()
