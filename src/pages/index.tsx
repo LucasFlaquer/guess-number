@@ -37,7 +37,7 @@ export default function Home({ value, error }: HomeProps): JSX.Element {
       setDigitColor('#CC3300');
       setDigits([
         numberColorsSchema(5),
-        numberColorsSchema(2),
+        numberColorsSchema(0),
         numberColorsSchema(2),
       ]);
       setIsDisabled(true);
