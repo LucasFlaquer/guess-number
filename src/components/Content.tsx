@@ -6,4 +6,5 @@ export const Content = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: 130px;
+  position: relative;
 `;

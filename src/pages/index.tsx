@@ -29,13 +29,13 @@ export const DigitsList = styled.div`
 `; 
 
 export const Form = styled.form`
-  margin-top: 40px;
+  margin-top:100px;
   display: flex;
 `;
 
 export const Input = styled.input`
   padding: 14px 8px;
-  border: 1px solid #CFCFCF;
+  border: 2px solid #CFCFCF;
   border-radius: 4px;
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
@@ -43,6 +43,11 @@ export const Input = styled.input`
   height: 42px;
   min-width: 210px;
   margin-right: 15px;
+  outline: none;
+
+  &:focus, &:active {
+    border-color: #ef6c00;
+  }
 `;
 
 export const Button = styled.button`
@@ -79,7 +84,20 @@ export const Message = styled.p<MessageProps>`
 
 `;
 
-
+export const RestartButton = styled.button`
+  background: linear-gradient(#434854, #9E9E9E);
+  height: 42px;
+  position: absolute;
+  bottom: 20%;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  text-transform: uppercase;
+  color: #FFF;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  padding: 14px 8px;
+`
 
 export default function Home({value, error}:HomeProps): JSX.Element {
   const [guessNumber, setGuessNumber] = useState('');
@@ -129,6 +147,23 @@ export default function Home({value, error}:HomeProps): JSX.Element {
       setGuessNumber(event.target.value);
     }
   }
+  async function handleReset(): Promise<void> {
+    setDigits([numberColorsSchema(0)]);
+    try {
+      const number = await fetchNumber();
+      setCorrectNumber(number.value);
+      setIsDisabled(false);
+      setDigitColor('#262A34');
+      setGuessNumber('');
+      setMessageColor('');
+      setMessage('');
+      
+    } catch (error:any) {
+      setDigitColor('#CC3300');
+      setDigits(error.response.status.toString().split('').map((number: string)=> numberColorsSchema(Number(number))));
+    }
+
+  }
 
   return (
     <Container>
@@ -155,7 +190,14 @@ export default function Home({value, error}:HomeProps): JSX.Element {
             />
           ))}
         </DigitsList>
-        
+        {
+          isDisabled && (
+          <RestartButton onClick={handleReset}>
+            <img src="/refresh.svg" alt="refresh icon" />
+            nova partida
+          </RestartButton>
+          )
+        }
         
 
         <Form onSubmit={handleSubmit}>
@@ -175,14 +217,12 @@ export default function Home({value, error}:HomeProps): JSX.Element {
 export const getStaticProps: GetStaticProps = async () => {
   try {
     const number = await fetchNumber();
-    console.log(number)
     return {
       props: {
         value: number.value
       }
     }
   } catch (error) {
-    console.log('deu erro')
     return {
       props: {
         error: 'error',
