@@ -8,9 +8,8 @@ import { Digit } from '../components/Digit';
 import { DigitsList } from '../components/Digits/DigitsList';
 import { Form } from '../components/Form';
 import { Input } from '../components/Form/Input';
+import { Header } from '../components/Header';
 import { Message } from '../components/Message';
-import { Separator } from '../components/Separator';
-import { Title } from '../components/Title';
 import { fetchNumber } from '../services/fetchNumber';
 import { numberColorsSchema } from '../utils/numberSchema';
 import { ColorSchema } from '../utils/numberSchemaData';
@@ -103,10 +102,7 @@ export default function Home({ value, error }: HomeProps): JSX.Element {
 
   return (
     <Container>
-      <Title>
-        Qual é o Número?
-        <Separator />
-      </Title>
+      <Header />
       <Content>
         <Message messageColor={messageColor}>{message}</Message>
         <DigitsList>
