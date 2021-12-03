@@ -105,7 +105,7 @@ export default function Home({ value, error }: HomeProps): JSX.Element {
       <Header />
       <Content>
         <Message messageColor={messageColor}>{message}</Message>
-        <DigitsList>
+        <DigitsList data-number={guessNumber}>
           {digits.map((digit) => (
             <Digit
               height={100 * 2}
@@ -137,7 +137,7 @@ export default function Home({ value, error }: HomeProps): JSX.Element {
             onChange={handleInputChange}
             disabled={isDisabled}
           />
-          <ButtonSend disabled={isDisabled} type="submit">
+          <ButtonSend id="send" disabled={isDisabled} type="submit">
             Enviar
           </ButtonSend>
         </Form>
